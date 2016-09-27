@@ -10,7 +10,7 @@ C:.
 ¦   ¦   +---Windows							//Version para Windows
 ¦   ¦       +---include						//Clases y cabeceras a incluir
 ¦   ¦       ¦	+---DataType.h
-¦   ¦	    ¦   +---NeuronDataReader.h			
+¦   ¦       ¦    +---NeuronDataReader.h			
 ¦   ¦       +---lib
 ¦   ¦           +---x86						//Libreria para 32 bits
 ¦   ¦               +---NeuronDataReader.dll
