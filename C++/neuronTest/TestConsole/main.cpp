@@ -1,7 +1,7 @@
 #include <iostream>
 #include "NeuronDataReader.h"
 #include <Windows.h>
-#include "mian.h"
+#include "main.h"
 using namespace std;
 
 ReaderTest::ReaderTest(){
