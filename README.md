@@ -1,30 +1,33 @@
-Este proyecto pretende leer los datos mandados por el traje Neuron y replicar los movimientos en el robot NAO.
+#Este proyecto pretende leer los datos mandados por el traje Neuron y replicar los movimientos en el robot NAO.
 
-Estructura del repositorio
+##Estructura del repositorio
 
+```
 C:.
 +---C++					
-¦   +---NeuronDataReader SDK b15			//SDK de Neuron
-¦   ¦   +---NeuronDataReader Runtime API Documentation_D16.pdf  
-¦   ¦   +---Windows							//Version para Windows
-¦   ¦       +---include						//Clases y cabeceras a incluir
-¦   ¦       ¦	+---DataType.h
-¦   ¦	    ¦   +---NeuronDataReader.h			
-¦   ¦       +---lib
-¦   ¦           +---x86						//Libreria para 32 bits
-¦   ¦               +---NeuronDataReader.dll
-¦   ¦               +---NeuronDataReader.lib
-¦   +---neuronTest			
-¦       +---neuronTest.sln					//Solucion de visual studio de c++
-¦       +---TestConsole			
-¦           +---TestConsole.vcxproj			//Proyecto ejemplo
-¦           +---main.cpp					//Codigo principal
-¦           +---main.h						//Cabecera principal
+Â¦   +---NeuronDataReader SDK b15			//SDK de Neuron
+Â¦   Â¦   +---NeuronDataReader Runtime API Documentation_D16.pdf  
+Â¦   Â¦   +---Windows							//Version para Windows
+Â¦   Â¦       +---include						//Clases y cabeceras a incluir
+Â¦   Â¦       Â¦	+---DataType.h
+Â¦   Â¦	    Â¦   +---NeuronDataReader.h			
+Â¦   Â¦       +---lib
+Â¦   Â¦           +---x86						//Libreria para 32 bits
+Â¦   Â¦               +---NeuronDataReader.dll
+Â¦   Â¦               +---NeuronDataReader.lib
+Â¦   +---neuronTest			
+Â¦       +---neuronTest.sln					//Solucion de visual studio de c++
+Â¦       +---TestConsole			
+Â¦           +---TestConsole.vcxproj			//Proyecto ejemplo
+Â¦           +---main.cpp					//Codigo principal
+Â¦           +---main.h						//Cabecera principal
 +---Python									//Ejemplos en python
     +---motion_taskManagement2.py
     +---TestNaoMotion.py
+```
 
-Intrucciones:
+##Intrucciones:
+
 1.- Abrir AxisNeuron y dentro de File>Settingd>Broadcasting seleccionar TCP, 127.0.0.1 como direccion host, y activar BVH en el puerto 7001.
 
 ![alt tag](https://github.com/RuVT/NeuronToNao/blob/master/Image/Settings.PNG?raw=true)
@@ -36,4 +39,6 @@ Intrucciones:
 3.- Compilar el proyecto, seleccionar alguno de los ejemplos pregrabados en AxisNeuron y comprobar que se reciban las coordenadas.
 
 ![alt tag](https://github.com/RuVT/NeuronToNao/blob/master/Image/AxisNeuron.PNG?raw=true)
+
+
 ![alt tag](https://github.com/RuVT/NeuronToNao/blob/master/Image/TestConsole.PNG?raw=true)
