@@ -11,7 +11,7 @@ ReaderTest::ReaderTest(){
 void ReaderTest::bvhFrameDataReceived(void* customedObj, SOCKET_REF sender, BvhDataHeader* header, float* data)
 {
 	//Numero del sensor, 0 es el sensor ubicado en la cadera
-	int CurSel = 0;
+	int CurSel = 16;
 	//Calcular el indice
 	int dataIndex = CurSel * 6;
 	if(header->WithReference)
@@ -22,14 +22,24 @@ void ReaderTest::bvhFrameDataReceived(void* customedObj, SOCKET_REF sender, BvhD
 	float dispX = data[dataIndex + 0];
 	float dispY = data[dataIndex + 1];
 	float dispZ = data[dataIndex + 2];
+	float angX = data[dataIndex + 4];
+	float angY = data[dataIndex + 3];
+	float angZ = data[dataIndex + 5];
 	char strBuff[32];
 	//Convertir float en strings e imprimir en pantalla
 	sprintf_s(strBuff, sizeof(strBuff), "%0.3f", dispX);
-	cout << "X = " << strBuff;
+	cout << "X = {" << strBuff;
+	sprintf_s(strBuff, sizeof(strBuff), "%0.3f", angX);
+	cout << ", " << strBuff << "}";
 	sprintf_s(strBuff, sizeof(strBuff), "%0.3f", dispY);
 	cout << ", Y = " << strBuff;
+	sprintf_s(strBuff, sizeof(strBuff), "%0.3f", angY);
+	cout << ", " << strBuff << "}";
 	sprintf_s(strBuff, sizeof(strBuff), "%0.3f", dispZ);
-	cout << ", Z = " << strBuff << endl;
+	cout << ", Z = " << strBuff;
+	sprintf_s(strBuff, sizeof(strBuff), "%0.3f", angZ);
+	cout << ", " << strBuff << "}";
+	cout << endl;
 }
 
 //Este metodo registra el callback par sea activado
