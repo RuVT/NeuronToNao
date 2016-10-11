@@ -22,7 +22,7 @@ namespace NeuronReaderConsole.BodyParts
 
         void Rot_XValueChanhed(object sender, ValueChangedEventArgs e)
         {
-            if (e.value > 30)
+            if (e.value > 25)
             {
                 if(currentProcess == null && State != HeadState.HeadLeft)
                 {
@@ -34,17 +34,18 @@ namespace NeuronReaderConsole.BodyParts
                     currentProcess = Process.Start(info);
                     currentProcess.WaitForExit();
                     currentProcess = null;
-                    Console.WriteLine("Head move");
+                    Console.WriteLine("Head move left");
                 }
             }
-            if (e.value < -30)
+            if (e.value < -25)
             {
                 if (currentProcess == null && State != HeadState.HeadRight)
                 {
+                    State = HeadState.HeadRight;
                     Console.WriteLine("Head move right");
                 }
             }
-            if (e.value > -30 && e.value < 30)
+            if (e.value > -25 && e.value < 25)
             {
                 if (currentProcess == null && State != HeadState.HeadCenter)
                 {
