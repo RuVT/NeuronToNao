@@ -46,9 +46,9 @@ namespace NeuronReaderConsole.BodyParts
             }
         }
         public event EventHandler<ValueChangedEventArgs>
-            XValueChanhed,
-            YValueChanhed,
-            ZValueChanhed;
+            XValueChanged,
+            YValueChanged,
+            ZValueChanged;
         public Vector3D(double x, double y, double z)
         {
             _x = x;
@@ -59,9 +59,9 @@ namespace NeuronReaderConsole.BodyParts
         void OnValueChanged(string coor, ValueChangedEventArgs arg) 
         {
             EventHandler<ValueChangedEventArgs> handler =
-                (coor == "x") ? XValueChanhed :
-                (coor == "y") ? YValueChanhed :
-                (coor == "z") ? ZValueChanhed :
+                (coor == "x") ? XValueChanged :
+                (coor == "y") ? YValueChanged :
+                (coor == "z") ? ZValueChanged :
                 null;
             if (handler != null)
             {
