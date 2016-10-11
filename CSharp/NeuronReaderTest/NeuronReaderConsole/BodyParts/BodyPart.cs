@@ -7,12 +7,13 @@ using NeuronDataReaderWraper;
 using System.Runtime.InteropServices;
 namespace NeuronReaderConsole.BodyParts
 {
-    class BodyPart
+    class BodyPart<T>
     {
         List<Bone> bones;
         private FrameDataReceived _DataReceived;
         private BvhDataHeader _bvhHeader;
         private float[] _valuesBuffer = new float[354];
+        protected T State;
         public List<Bone> Bones
         {
             get 
