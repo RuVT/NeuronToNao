@@ -30,7 +30,7 @@ namespace NeuronReaderConsole.BodyParts
                     ProcessStartInfo info = new ProcessStartInfo();
                     info.WindowStyle = ProcessWindowStyle.Hidden;
                     info.FileName = "cmd.exe";
-                    info.Arguments = "/C Python moveHead.py 127.0.0.1";
+                    info.Arguments = "/C Python moveHeadLeft.py";
                     currentProcess = Process.Start(info);
                     currentProcess.WaitForExit();
                     currentProcess = null;
@@ -42,6 +42,13 @@ namespace NeuronReaderConsole.BodyParts
                 if (currentProcess == null && State != HeadState.HeadRight)
                 {
                     State = HeadState.HeadRight;
+                    ProcessStartInfo info = new ProcessStartInfo();
+                    info.WindowStyle = ProcessWindowStyle.Hidden;
+                    info.FileName = "cmd.exe";
+                    info.Arguments = "/C Python moveHeadRight.py";
+                    currentProcess = Process.Start(info);
+                    currentProcess.WaitForExit();
+                    currentProcess = null;
                     Console.WriteLine("Head move right");
                 }
             }
@@ -50,6 +57,13 @@ namespace NeuronReaderConsole.BodyParts
                 if (currentProcess == null && State != HeadState.HeadCenter)
                 {
                     State = HeadState.HeadCenter;
+                    ProcessStartInfo info = new ProcessStartInfo();
+                    info.WindowStyle = ProcessWindowStyle.Hidden;
+                    info.FileName = "cmd.exe";
+                    info.Arguments = "/C Python moveHeadCenter.py";
+                    currentProcess = Process.Start(info);
+                    currentProcess.WaitForExit();
+                    currentProcess = null;
                     Console.WriteLine("Head move center");
                 }
             }

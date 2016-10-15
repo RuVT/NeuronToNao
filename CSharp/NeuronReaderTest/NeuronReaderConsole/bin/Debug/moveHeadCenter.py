@@ -8,6 +8,7 @@ import time
 from naoqi import ALProxy
 
 def main(robotIP):
+    proxy = 0
     try:
         proxy = ALProxy("ALMotion", robotIP, 9559)
     except Exception, e:
@@ -23,22 +24,10 @@ def main(robotIP):
     isAbsolute = True
     proxy.angleInterpolation(names, angles, times, isAbsolute)
 
-    # move slowly the head to look in the left direction
-    names  = "HeadYaw"
-    angles = math.pi/2
-    fractionMaxSpeed  = .1
-    proxy.setAngles(names, angles, fractionMaxSpeed)
-
     time.sleep(1.)
 
-    # while the previous motion is still running, update the angle
-    angles  = -math.pi/6
-    fractionMaxSpeed  = 1.
-    proxy.setAngles(names, angles, fractionMaxSpeed)
-
-
 if __name__ == "__main__":
-    robotIp = "127.0.0.1"
+    robotIp = "169.254.254.250"
 
     if len(sys.argv) <= 1:
         print "Usage python motion_taskManagement2.py robotIP (optional default: 127.0.0.1)"
