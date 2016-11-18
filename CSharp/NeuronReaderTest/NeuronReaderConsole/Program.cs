@@ -11,10 +11,30 @@ namespace NeuronReaderConsole
     class Program
     {
         static void Main(string[] args)
-        {
-            Head head = new Head();
+        { 
             IntPtr mySocket = IntPtr.Zero;
             mySocket = NeuronDataReader.BRConnectTo("127.0.0.1", 7001);
+            Body myBody = new Body();
+            myBody.Parts.Add(
+                new BodyPart()
+                {
+                    BoneNumbers = new int[] { 0, 1, 2, 3, 4, 5, 6 },
+                    OutputActions = new string[]
+                    {
+                        "MOVE_FORWARD",
+                        "MOVE_BACKWARDS",
+                        "STANDING"
+                    },
+                    ScriptActions = new string[] 
+                    {
+                        "walkStart.py",
+                        "walkReverse.py",
+                        "walkStop2.py"
+                    },
+                    Name = "Pies",
+                    outputArray = new double[] {1, 0, 0}
+                });
+            NeuronReceiver.Instance.Subscribe(myBody.Parts[0]);
             while (true)
             {
                 switch (NeuronDataReader.BRGetSocketStatus(mySocket))
@@ -29,6 +49,34 @@ namespace NeuronReaderConsole
                         Console.WriteLine("Not working");
                         break;
                 }
+                Console.WriteLine("Read[0] Train[1] Test[2] Save[4] Load[5]");
+                char key = Console.ReadKey().KeyChar;
+                switch (key)
+                {
+                    case '0':
+                        Console.WriteLine("Expected result?");
+                        string output = Console.ReadLine();
+                        string[] nums = output.Trim().Split(' ');
+                        myBody.Parts[0].outputArray = nums.Select(t => double.Parse(t)).ToArray();
+                        myBody.Parts[0].State = NetworkSate.RECORDING;
+                        break;
+                    case '1':
+                        Console.WriteLine();
+                        output = Console.ReadLine();
+                        Console.WriteLine("Expected result?");
+                        //nums = output.Trim().Split(' ');
+                        //myBody.Parts[0].outputArray = nums.Select(t => double.Parse(t)).ToArray();
+                        myBody.Parts[0].State = NetworkSate.TRAINING;
+                        break;
+                    case '2':
+                        myBody.Parts[0].State = NetworkSate.COMPUTING;
+                        Thread.Sleep(5000);
+                        break;
+                    case '3':
+                        myBody.Save("body.01");
+                        break;
+                }
+
                 Thread.Sleep(1000);               
             }
             //_DataReceived = new FrameDataReceived(bvhDataReceived);

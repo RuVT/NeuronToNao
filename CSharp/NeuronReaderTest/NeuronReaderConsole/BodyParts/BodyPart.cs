@@ -1,86 +1,199 @@
-﻿using System;
+﻿using NeuralNetwork.Network;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NeuronDataReaderWraper;
-using System.Runtime.InteropServices;
+using System.Diagnostics;
 namespace NeuronReaderConsole.BodyParts
 {
-    class BodyPart<T>
+    [Serializable()]
+    public class BodyPart : IObserver<float[]>
     {
-        List<Bone> bones;
-        private FrameDataReceived _DataReceived;
-        private BvhDataHeader _bvhHeader;
-        private float[] _valuesBuffer = new float[354];
-        protected T State;
-        public List<Bone> Bones
+        [NonSerialized()]
+        public EventHandler StateChanged;
+
+        [NonSerialized()]
+        public EventHandler TrainingEnded;
+
+        [NonSerialized()]
+        public EventHandler OutputChanged;
+
+        [NonSerialized()]
+        public IDisposable Subcription;
+
+        public int SampleLength = 100;
+
+        public string[] OutputActions = new string[10];
+
+        [NonSerialized()]
+        public double[] outputArray;
+
+        public string[] ScriptActions = new string[10];
+
+        [NonSerialized()]
+        private NetworkSate state;
+
+        public bool ApplayScrips = false;
+
+        public NetworkSate State
         {
-            get 
+            get
             {
-                if (bones == null)
-                {
-                    bones = new List<Bone>();
-                }
-                return bones;
+                return state;
+            }
+            set
+            {
+                state = value;
+                OnStateChanged();
             }
         }
 
-        public BodyPart()
+        private void OnStateChanged()
         {
-            _DataReceived = new FrameDataReceived(bvhDataReceived);
-            NeuronDataReader.BRRegisterFrameDataCallback(IntPtr.Zero, _DataReceived);
+            if (StateChanged != null)
+            {
+                StateChanged(this, null);
+            }
         }
 
-        void bvhDataReceived(IntPtr customObject, IntPtr sockRef, IntPtr DataHeader, IntPtr data)
+        protected List<DataSet> dataSets;
+
+        public List<DataSet> DataSets
         {
-            _bvhHeader = (BvhDataHeader)Marshal.PtrToStructure(DataHeader, typeof(BvhDataHeader));
-
-            // Change the buffer length if necessary
-            if (_bvhHeader.DataCount != _valuesBuffer.Length)
+            get
             {
-                _valuesBuffer = new float[_bvhHeader.DataCount];
+                if (dataSets == null)
+                    dataSets = new List<DataSet>();
+                return dataSets;
             }
+        }
 
-            Marshal.Copy(data, _valuesBuffer, 0, (int)_bvhHeader.DataCount);
-            if (_bvhHeader.bWithDisp == 1)
+        [NonSerialized()]
+        protected double[] inputArray;
+
+        protected Network network;
+
+        [NonSerialized()]
+        protected double[] realOutput;
+
+        private int SetCount;
+
+        public int[] BoneNumbers { get; set; }
+
+        public string Name { get; set; }
+
+        public Network Network
+        {
+            get
             {
-                foreach (Bone b in Bones)
+                if (network == null)
                 {
-                    b.Pos.X = _valuesBuffer[b.Number * 6 + 0];
-                    b.Pos.Y = _valuesBuffer[b.Number * 6 + 1];
-                    b.Pos.Z = _valuesBuffer[b.Number * 6 + 2];
+                    network = new Network(BoneNumbers.Length * 6, BoneNumbers.Length * 12, OutputActions.Length);
+                }
+                return network;
+            }
+        }
 
-                    b.Rot.X = _valuesBuffer[b.Number * 6 + 3];
-                    b.Rot.Y = _valuesBuffer[b.Number * 6 + 4];
-                    b.Rot.Z = _valuesBuffer[b.Number * 6 + 5];
+        public double[] RealOutput
+        {
+            get
+            {
+                return realOutput;
+            }
+        }
+
+        public virtual void DoActions(double[] output)
+        {
+            if (realOutput == null)
+                realOutput = new double[output.Length];
+            if (state == NetworkSate.COMPUTING)
+            {
+                for (int n = 0; n < output.Length; n++)
+                {
+                    if (realOutput[n] < 0.5 && output[n] > 0.5)
+                    {
+                        Console.WriteLine(OutputActions[n]);
+                        if (ApplayScrips)
+                        {
+                            ProcessStartInfo info = new ProcessStartInfo();
+                            info.WindowStyle = ProcessWindowStyle.Hidden;
+                            info.FileName = "cmd.exe";
+                            info.Arguments = string.Format("/C Python {0}", ScriptActions[n]);
+                            Process currentProcess = Process.Start(info);
+                            currentProcess.WaitForExit();
+                        }
+                    }
                 }
             }
-            else 
+        }
+
+        public void FillInputArray(float[] value)
+        {
+            for (int n = 0; n < BoneNumbers.Length; n++)
             {
-                //if (boneId == 0)
-                //{
-                //    tbdisp_x.Text = bvhData[boneId * 6 + 0].ToString();
-                //    tbdisp_y.Text = bvhData[boneId * 6 + 1].ToString();
-                //    tbdisp_z.Text = bvhData[boneId * 6 + 2].ToString();
-
-                //    tbrt_x.Text = bvhData[boneId * 6 + 3].ToString();
-                //    tbrt_y.Text = bvhData[boneId * 6 + 4].ToString();
-                //    tbrt_z.Text = bvhData[boneId * 6 + 5].ToString();
-                //}
-                //else 
-                //{
-                //    tbrt_x.Text = bvhData[3 + boneId * 3 + 0].ToString();
-                //    tbrt_y.Text = bvhData[3 + boneId * 3 + 1].ToString();
-                //    tbrt_z.Text = bvhData[3 + boneId * 3 + 2].ToString();
-
-                //    tbdisp_x.Text = "0";
-                //    tbdisp_y.Text = "0";
-                //    tbdisp_z.Text = "0";
-                //}
+                inputArray[n * 6 + 0] = value[BoneNumbers[n] * 6 + 0];//Pos X
+                inputArray[n * 6 + 1] = value[BoneNumbers[n] * 6 + 1];//Pos Y
+                inputArray[n * 6 + 2] = value[BoneNumbers[n] * 6 + 2];//Pos Z
+                inputArray[n * 6 + 3] = value[BoneNumbers[n] * 6 + 3];//Rot X
+                inputArray[n * 6 + 4] = value[BoneNumbers[n] * 6 + 4];//Rot Y
+                inputArray[n * 6 + 5] = value[BoneNumbers[n] * 6 + 5];//Rot Z
             }
-           
-        } 
+        }
 
+        public void OnCompleted()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnError(Exception error)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNext(float[] value)
+        {
+            inputArray = new double[BoneNumbers.Length * 6];
+            FillInputArray(value);
+            switch (state)
+            {
+                case NetworkSate.RECORDING:
+                    if (SetCount < SampleLength)
+                    {
+                        DataSets.Add(new DataSet(inputArray, outputArray));
+                        SetCount++;
+                    }
+                    else
+                    {
+                        State = NetworkSate.NO_ACTION;
+                        SetCount = 0;
+                    }
+                    break;
+
+                case NetworkSate.TRAINING:
+                    Network.Train(DataSets, 0.01);
+                    OnTrainingEnded();
+                    State = NetworkSate.NO_ACTION;
+                    break;
+
+                case NetworkSate.COMPUTING:
+                    double[] temp = Network.Compute(inputArray);
+                    DoActions(temp);
+                    realOutput = temp;
+                    OnOutputChanged();
+                    break;
+            }
+        }
+
+        private void OnOutputChanged()
+        {
+            if(OutputChanged != null)
+            {
+                OutputChanged(this, null);
+            }
+        }
+
+        private void OnTrainingEnded()
+        {
+            if (TrainingEnded != null)
+                TrainingEnded(this, null);
+        }
     }
 }

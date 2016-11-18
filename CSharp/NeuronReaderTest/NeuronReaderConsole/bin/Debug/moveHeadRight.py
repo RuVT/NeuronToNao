@@ -26,7 +26,7 @@ def main(robotIP):
     time.sleep(1.)
 
 if __name__ == "__main__":
-    robotIp = "169.254.254.250"
+    robotIp = "127.0.0.1"
 
     if len(sys.argv) <= 1:
         print "Usage python motion_taskManagement2.py robotIP (optional default: 127.0.0.1)"

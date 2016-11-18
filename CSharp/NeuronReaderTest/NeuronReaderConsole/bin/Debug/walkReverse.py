@@ -14,16 +14,7 @@ def main(robotIP):
     except Exception, e:
         print "Could not create proxy to ALMotion"
         print "Error was: ", e
-
-    proxy.setStiffnesses("Head", 1.0)
-
-    # go to an init head pose.
-    names  = ["HeadYaw", "HeadPitch"]
-    angles = [0., 0.]
-    times  = [1.0, 1.0]
-    isAbsolute = True
-    proxy.angleInterpolation(names, angles, times, isAbsolute)
-
+    proxy.moveToward(-1, 0, 0)
     time.sleep(1.)
 
 if __name__ == "__main__":

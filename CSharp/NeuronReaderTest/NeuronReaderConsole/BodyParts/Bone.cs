@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NeuronReaderConsole.BodyParts
 {
-    class Bone
+    public class Bone
     {
         int number;
         Vector3D pos;

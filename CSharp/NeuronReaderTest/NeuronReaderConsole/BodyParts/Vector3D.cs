@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NeuronReaderConsole.BodyParts
 {
-    class Vector3D
+    public class Vector3D
     {
         double _x, _y, _z;
         public double X

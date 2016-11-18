@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace NeuronReaderTest
 {
-    public partial class Form1 : Form
+    public partial class CreateBodyPartWindow : Form
     {
-        public Form1()
+        public CreateBodyPartWindow()
         {
             InitializeComponent();
         }

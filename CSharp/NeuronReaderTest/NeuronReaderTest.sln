@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuronReaderTest", "NeuronReaderTest\NeuronReaderTest.csproj", "{D03C28AC-270D-4EC4-A5B8-1F88B5DE6C55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuronReaderConsole", "NeuronReaderConsole\NeuronReaderConsole.csproj", "{452063BC-A3B0-4234-9133-E5D4A7E5419A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestNeuronReader", "UnitTestNeuronReader\UnitTestNeuronReader.csproj", "{7F306CCD-E87B-4C81-ABD6-FD421992C964}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetwork", "..\Neural-Network\NeuralNetwork\NeuralNetwork\NeuralNetwork.csproj", "{1B513876-712C-4699-94A0-6F199CE38BD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +25,14 @@ Global
 		{452063BC-A3B0-4234-9133-E5D4A7E5419A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{452063BC-A3B0-4234-9133-E5D4A7E5419A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{452063BC-A3B0-4234-9133-E5D4A7E5419A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F306CCD-E87B-4C81-ABD6-FD421992C964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F306CCD-E87B-4C81-ABD6-FD421992C964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F306CCD-E87B-4C81-ABD6-FD421992C964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F306CCD-E87B-4C81-ABD6-FD421992C964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B513876-712C-4699-94A0-6F199CE38BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B513876-712C-4699-94A0-6F199CE38BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B513876-712C-4699-94A0-6F199CE38BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B513876-712C-4699-94A0-6F199CE38BD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
