@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\..\NeuronDataReader SDK b15\Windows\include;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\NeuronDataReader SDK b15\Windows\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\GRT\include;..\..\NeuronDataReader SDK b15\Windows\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\GRT\include;..\..\NeuronDataReader SDK b15\Windows\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -51,7 +51,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>NeuronDataReader.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>NeuronDataReader.lib;grt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

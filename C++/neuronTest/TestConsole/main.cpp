@@ -2,6 +2,8 @@
 #include "NeuronDataReader.h"
 #include <Windows.h>
 #include "main.h"
+#include <iostream>
+#include <string>
 using namespace std;
 
 ReaderTest::ReaderTest(){
@@ -11,7 +13,7 @@ ReaderTest::ReaderTest(){
 void ReaderTest::bvhFrameDataReceived(void* customedObj, SOCKET_REF sender, BvhDataHeader* header, float* data)
 {
 	//Numero del sensor, 0 es el sensor ubicado en la cadera
-	int CurSel = 16;
+	int CurSel = 15;
 	//Calcular el indice
 	int dataIndex = CurSel * 6;
 	if(header->WithReference)
@@ -22,8 +24,8 @@ void ReaderTest::bvhFrameDataReceived(void* customedObj, SOCKET_REF sender, BvhD
 	float dispX = data[dataIndex + 0];
 	float dispY = data[dataIndex + 1];
 	float dispZ = data[dataIndex + 2];
-	float angX = data[dataIndex + 4];
-	float angY = data[dataIndex + 3];
+	float angX = data[dataIndex + 3];
+	float angY = data[dataIndex + 4];
 	float angZ = data[dataIndex + 5];
 	char strBuff[32];
 	//Convertir float en strings e imprimir en pantalla
