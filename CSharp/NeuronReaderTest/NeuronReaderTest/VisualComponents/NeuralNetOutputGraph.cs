@@ -41,7 +41,11 @@ namespace NeuronReaderTest.VisualComponents
                 outputSerie.ChartType = SeriesChartType.Bar;
                 for (int n = 0; n < part.OutputActions.Length; n++)
                 {
-                    outputSerie.Points.AddXY(part.OutputActions[n], part.RealOutput[n]);
+                    try
+                    {
+                        outputSerie.Points.AddXY(part.OutputActions[n], part.RealOutput[n]);
+                    }
+                    catch (Exception) { }
                 }
                 chart_output.Series.Add(outputSerie);
             }

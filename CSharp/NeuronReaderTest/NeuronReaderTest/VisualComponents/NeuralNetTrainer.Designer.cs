@@ -43,6 +43,7 @@
             this.btn_start_training = new System.Windows.Forms.Button();
             this.label_dataSetLength = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnClear = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -56,7 +57,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.36416F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.63584F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 173F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 174F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 0);
@@ -80,7 +81,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(220, 63);
+            this.panel1.Size = new System.Drawing.Size(219, 63);
             this.panel1.TabIndex = 5;
             // 
             // label2
@@ -99,7 +100,7 @@
             this.comboBox_bodyParts.FormattingEnabled = true;
             this.comboBox_bodyParts.Location = new System.Drawing.Point(0, 42);
             this.comboBox_bodyParts.Name = "comboBox_bodyParts";
-            this.comboBox_bodyParts.Size = new System.Drawing.Size(220, 21);
+            this.comboBox_bodyParts.Size = new System.Drawing.Size(219, 21);
             this.comboBox_bodyParts.TabIndex = 4;
             this.comboBox_bodyParts.SelectedIndexChanged += new System.EventHandler(this.comboBox_bodyParts_SelectedIndexChanged);
             // 
@@ -115,7 +116,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.3139F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.6861F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(220, 289);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(219, 289);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // checkedListBox_states
@@ -124,7 +125,7 @@
             this.checkedListBox_states.FormattingEnabled = true;
             this.checkedListBox_states.Location = new System.Drawing.Point(3, 32);
             this.checkedListBox_states.Name = "checkedListBox_states";
-            this.checkedListBox_states.Size = new System.Drawing.Size(214, 254);
+            this.checkedListBox_states.Size = new System.Drawing.Size(213, 254);
             this.checkedListBox_states.TabIndex = 1;
             // 
             // label1
@@ -141,7 +142,7 @@
             this.panel2.Controls.Add(this.numericUpDown_sampleLength);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(229, 3);
+            this.panel2.Location = new System.Drawing.Point(228, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(93, 63);
             this.panel2.TabIndex = 8;
@@ -177,10 +178,11 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnClear);
             this.panel3.Controls.Add(this.btn_record);
             this.panel3.Controls.Add(this.btn_start_training);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(229, 72);
+            this.panel3.Location = new System.Drawing.Point(228, 72);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(93, 289);
             this.panel3.TabIndex = 9;
@@ -212,7 +214,7 @@
             // label_dataSetLength
             // 
             this.label_dataSetLength.AutoSize = true;
-            this.label_dataSetLength.Location = new System.Drawing.Point(328, 69);
+            this.label_dataSetLength.Location = new System.Drawing.Point(327, 69);
             this.label_dataSetLength.Name = "label_dataSetLength";
             this.label_dataSetLength.Size = new System.Drawing.Size(94, 13);
             this.label_dataSetLength.TabIndex = 10;
@@ -221,10 +223,20 @@
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(328, 3);
+            this.panel4.Location = new System.Drawing.Point(327, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(168, 63);
+            this.panel4.Size = new System.Drawing.Size(169, 63);
             this.panel4.TabIndex = 11;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(-3, 129);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(93, 23);
+            this.btnClear.TabIndex = 8;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // NeuralNetTrainer
             // 
@@ -265,5 +277,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label_dataSetLength;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btnClear;
     }
 }

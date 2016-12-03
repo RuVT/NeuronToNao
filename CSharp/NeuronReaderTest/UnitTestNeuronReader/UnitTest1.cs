@@ -4,6 +4,7 @@ using NeuronReaderConsole;
 using System.Threading;
 using NeuronReaderConsole.BodyParts;
 using NeuralNetwork.Network;
+using System.IO;
 
 namespace UnitTestNeuronReader
 {
@@ -36,7 +37,11 @@ namespace UnitTestNeuronReader
         [TestMethod]
         public void LoadBody()
         {
-            body = Body.Load("test1.01");
+            string path = @"C:\Users\Ruben\Documents\GitHub\NAO_Neuron_Project\Sesiones\Partes";
+            Body body1 = Body.Load(Path.Combine(path, "brazoDer.01"));
+            Body body2 = Body.Load(Path.Combine(path, "brazoIzq.01"));
+            body1.Parts.AddRange(body2.Parts.ToArray());
+            body1.Save(Path.Combine(path, "DosBrazos.01"));
         }
 
         public void WalkFront()

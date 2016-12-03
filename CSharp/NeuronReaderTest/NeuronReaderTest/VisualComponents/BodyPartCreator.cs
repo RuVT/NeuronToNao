@@ -41,8 +41,10 @@ namespace NeuronReaderTest.VisualComponents
                 textBox_name.Text = p.Name;
                 foreach (var num in p.BoneNumbers)
                     numbers.Rows.Add(num);
-                foreach (var item in p.OutputActions)
-                    actions.Rows.Add(item, "");
+                for(int n=0; n < p.OutputActions.Length; n++)
+                {
+                    actions.Rows.Add(p.OutputActions[n], p.ScriptActions[n]);
+                }
             }
         }
 
@@ -54,13 +56,15 @@ namespace NeuronReaderTest.VisualComponents
                     {
                         Name = textBox_name.Text,
                         BoneNumbers = numbers.AsEnumerable().Select(row => row.Field<int>("Bone Number")).ToArray(),
-                        OutputActions = actions.AsEnumerable().Select(row => row.Field<string>("Action Name")).ToArray()
+                        OutputActions = actions.AsEnumerable().Select(row => row.Field<string>("Action Name")).ToArray(),
+                        ScriptActions = actions.AsEnumerable().Select(row => row.Field<string>("Script response")).ToArray(),
                     });
             else
             {
                 actual.Name = textBox_name.Text;
                 actual.BoneNumbers = numbers.AsEnumerable().Select(row => row.Field<int>("Bone Number")).ToArray();
                 actual.OutputActions = actions.AsEnumerable().Select(row => row.Field<string>("Action Name")).ToArray();
+                actual.ScriptActions = actions.AsEnumerable().Select(row => row.Field<string>("Script response")).ToArray();
             }
             Close();           
         }

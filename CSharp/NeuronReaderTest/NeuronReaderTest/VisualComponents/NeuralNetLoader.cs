@@ -75,7 +75,9 @@ namespace NeuronReaderTest.VisualComponents
         {
             BodyPartCreator wind = new BodyPartCreator();
             wind.ShowDialog();
+            dgv_parts.DataSource = null;
             dgv_parts.DataSource = Body.ActualBody.Parts;
+
         }
 
         private void btn_edit_Click(object sender, EventArgs e)

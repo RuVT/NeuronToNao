@@ -31,7 +31,7 @@ namespace NeuronReaderConsole.BodyParts
         [NonSerialized()]
         private NetworkSate state;
 
-        public bool ApplayScrips = false;
+        public bool ApplayScrips = true;
 
         public NetworkSate State
         {
@@ -111,14 +111,13 @@ namespace NeuronReaderConsole.BodyParts
                     if (realOutput[n] < 0.5 && output[n] > 0.5)
                     {
                         Console.WriteLine(OutputActions[n]);
-                        if (ApplayScrips)
+                        if (n < ScriptActions.Length && ScriptActions[n]!= null && ScriptActions[n] != "")//ApplayScrips)
                         {
                             ProcessStartInfo info = new ProcessStartInfo();
                             info.WindowStyle = ProcessWindowStyle.Hidden;
                             info.FileName = "cmd.exe";
                             info.Arguments = string.Format("/C Python {0}", ScriptActions[n]);
-                            Process currentProcess = Process.Start(info);
-                            currentProcess.WaitForExit();
+                            ScriptExecutionList.Instance.ProcessList.Add(info);
                         }
                     }
                 }

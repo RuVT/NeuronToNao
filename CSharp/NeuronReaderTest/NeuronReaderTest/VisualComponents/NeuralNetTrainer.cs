@@ -142,5 +142,11 @@ namespace NeuronReaderTest.VisualComponents
             BodyPart part = Body.ActualBody.Parts[comboBox_bodyParts.SelectedIndex];
             part.SampleLength = Convert.ToInt32(numericUpDown_sampleLength.Value);
         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            BodyPart part = Body.ActualBody.Parts[comboBox_bodyParts.SelectedIndex];
+            part.DataSets.Clear();
+        }
     }
 }
